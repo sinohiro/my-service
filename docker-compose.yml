@@ -3,13 +3,18 @@ services:
     build:
       context: ./
     container_name: cloud
-    image: nextcloud:31
+    image: nextcloud:31.0.2
     restart: always
     environment:
       - MYSQL_HOST=cloud-db
       - MYSQL_PASSWORD=${CLOUD_DB_PASSWORD}
       - MYSQL_DATABASE=${CLOUD_DATABASE}
       - MYSQL_USER=${CLOUD_DB_USER}
+      - APACHE_DISABLE_REWRITE_IP=1
+      - OVERWRITEWEBROOT=/nextcloud
+      - CLOUD_ADMIN_USER=${CLOUD_ADMIN_USER}
+      - CLOUD_ADMIN_PASSWORD=${CLOUD_ADMIN_PASSWORD}
+
     volumes:
       - cloud:/var/www/html
     links:
@@ -43,7 +48,7 @@ services:
     ports:
       - "80:80"
     volumes:
-      - ./config/default.conf:/etc/nginx/conf.d/default.conf:ro 
+      - ./default.conf:/etc/nginx/conf.d/default.conf:ro 
     depends_on:
       - cloud
   
@@ -52,7 +57,7 @@ services:
     container_name: web
     restart: always
     volumes:
-      - ./webContens:/usr/share/nginx/html
+      - ./webContents:/usr/share/nginx/html
     depends_on:
       - nginx-proxy
 
@@ -60,10 +65,10 @@ volumes:
   cloud:
     driver_opts:
       type: none
-      device: /root/cloud/cloud-app
+      device: /Users/sinohiro/git/syoriken/my-service/cloud-app
       o: bind
   cloud-db: 
     driver_opts:
       type: none
-      device: /root/cloud/cloud-db
+      device: /Users/sinohiro/git/syoriken/my-service/cloud-db
       o: bind

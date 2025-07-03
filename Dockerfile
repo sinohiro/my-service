@@ -1,4 +1,4 @@
-FROM nextcloud:31
+FROM nextcloud:31.0.2
 
 RUN apt-get update && apt-get -y upgrade
 RUN apt-get -y install imagemagick
