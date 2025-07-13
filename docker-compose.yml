@@ -10,10 +10,10 @@ services:
       - MYSQL_PASSWORD=${CLOUD_DB_PASSWORD}
       - MYSQL_DATABASE=${CLOUD_DATABASE}
       - MYSQL_USER=${CLOUD_DB_USER}
+      - PHP_MEMORY_LIMIT=1024M
+      - PHP_UPLOAD_LIMIT=10240M
       - APACHE_DISABLE_REWRITE_IP=1
       - OVERWRITEWEBROOT=/nextcloud
-      - CLOUD_ADMIN_USER=${CLOUD_ADMIN_USER}
-      - CLOUD_ADMIN_PASSWORD=${CLOUD_ADMIN_PASSWORD}
 
     volumes:
       - cloud:/var/www/html
@@ -63,12 +63,14 @@ services:
 
 volumes:
   cloud:
+    driver: local
     driver_opts:
       type: none
-      device: /Users/sinohiro/git/syoriken/my-service/cloud-app
+      device: ${PWD}/cloud-app
       o: bind
-  cloud-db: 
+  cloud-db:
+    driver: local
     driver_opts:
       type: none
-      device: /Users/sinohiro/git/syoriken/my-service/cloud-db
+      device: ${PWD}/cloud-db
       o: bind

@@ -38,6 +38,7 @@ my-service/
 ├── Dockerfile                # Nextcloud用カスタムDockerfile
 ├── default.conf              # Nginx設定ファイル
 ├── .env                      # 環境変数設定
+├── exapmle.env               # 環境変数設定
 ├── webContens/               # ポートフォリオページ
 │   ├── index.html            # メインHTML
 │   ├── style.css             # スタイルシート
@@ -45,6 +46,7 @@ my-service/
 │   └── preview.png           # プレビュー画像
 ├── cloud-app/                # Nextcloudデータ (Docker実行時に作成)
 └── cloud-db/                 # MariaDBデータ (Docker実行時に作成)
+
 ```
 
 ## セットアップ手順
@@ -59,12 +61,19 @@ CLOUD_DATABASE=cloud-db
 CLOUD_DB_USER=nextcloud_user
 CLOUD_DB_PASSWORD=your_secure_password
 CLOUD_DB_ROOT_PASSWORD=your_root_password
+CLOUD_ADMIN_USER=nextcloud_admin_user
+CLOUD_ADMIN_PASSWORD=nextcloud_admin_password
 ```
 
 ### 2. サービスの起動
 
 ```bash
+# 必要なディレクトリを作成
+mkdir cloud-app
+mkdir cloud-db
+
 # サービスをバックグラウンドで起動
+docker compose build
 docker compose up -d
 ```
 
