@@ -40,6 +40,8 @@ services:
     restart: always
     ports:
       - "6379:6379"
+    volumes:
+      - redis-data:/data
 
   nginx-proxy:
     image: nginx
@@ -74,3 +76,5 @@ volumes:
       type: none
       device: ${PWD}/cloud-db
       o: bind
+  redis-data:
+    driver: local
