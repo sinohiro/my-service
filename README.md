@@ -61,8 +61,6 @@ CLOUD_DATABASE=cloud-db
 CLOUD_DB_USER=nextcloud_user
 CLOUD_DB_PASSWORD=your_secure_password
 CLOUD_DB_ROOT_PASSWORD=your_root_password
-CLOUD_ADMIN_USER=nextcloud_admin_user
-CLOUD_ADMIN_PASSWORD=nextcloud_admin_password
 ```
 
 ### 2. サービスの起動
